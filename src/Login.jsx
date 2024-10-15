@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 
 const Login = () => {
   const { signInUser, error, loading } = useContext(AuthContext);
   const [success, setSuccess] = useState('');
-  const [loginError, setLoginError] = useState(''); // Define loginError state
+  const [loginError, setLoginError] = useState('');// Define loginError state
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,6 +20,7 @@ const Login = () => {
       setSuccess('Login successful!');
       setLoginError(''); // Clear any previous login errors
       e.target.reset();
+      navigate("/")
     } else {
       setSuccess('');
       setLoginError(error); // Set login error message from context
@@ -52,7 +54,7 @@ const Login = () => {
 
         <p className="text-center text-gray-600 mt-6">
           Don't have an account? <Link to="/signup" className="text-blue-500 font-medium hover:underline">Register</Link>
-        </p>    
+        </p> 
       </div>
     </div>
     </div>
